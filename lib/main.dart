@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized;
   runApp(DevicePreview(
     enabled: !kReleaseMode,
     builder: (context) => MyApp(),
@@ -18,9 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "E-commerce",
-      
-        
+      title: "E-commerce", 
       debugShowCheckedModeBanner: false,
       theme: ThemeApp.themeApp,
       home:RegistrationScreen(),
