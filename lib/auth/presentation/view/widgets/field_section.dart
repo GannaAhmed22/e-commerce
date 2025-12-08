@@ -1,6 +1,7 @@
 import 'package:ecommerce/core/app_colors.dart';
 import 'package:flutter/material.dart';
-import '../../../core/app_fonts.dart';
+
+import '../../../../core/app_fonts.dart';
 
 class FieldSection extends StatefulWidget {
   const FieldSection({

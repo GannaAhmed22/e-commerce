@@ -1,16 +1,20 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:ecommerce/auth/view/registration_screen.dart';
+import 'package:ecommerce/auth/domain/usecases/login_usecase.dart';
+import 'package:ecommerce/auth/presentation/auth_view_model/auth_view_model.dart';
+import 'package:ecommerce/auth/presentation/view/registration_screen.dart';
 import 'package:ecommerce/core/theme_app.dart';
-import 'package:ecommerce/layout/nav_bar/bottom_nav_bar.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized;
-  runApp(DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => MyApp(),
-  ),);
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'auth/domain/usecases/register_usecase.dart';
+import 'core/di/di_manager.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  await setupDependencies();
+  
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -19,11 +23,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "E-commerce", 
+      title: "E-commerce",
       debugShowCheckedModeBanner: false,
       theme: ThemeApp.themeApp,
-      home:RegistrationScreen(),
-      
+      home: BlocProvider(
+          create: (_) => getIt.get<AuthCubit>(),
+          child: RegisterScreen(),
+        ),
     );
   }
 }

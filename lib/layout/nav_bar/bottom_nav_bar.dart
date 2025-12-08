@@ -26,6 +26,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(26),
             topRight: Radius.circular(26),
+            
           ),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,

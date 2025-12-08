@@ -6,7 +6,7 @@ abstract class AppAssets{
  static const String routeLogo = "assets/images/route_logo.png";
  static const String searchIcon = "assets/icons/search_icon.png";
  static const String shoppingCartIcon = "assets/icons/shopping cart_icon.png";
- static const String routeInit = "images/route_init.png";
+ static const String routeInit = "assets/images/route_init.png";
 
 
 
