@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce/api_manager/api_constants.dart';
 import 'package:ecommerce/auth/data/data_sources/auth_remote_ds.dart';
-import 'package:ecommerce/auth/data/models/request/register_request_dm.dart';
 import 'package:injectable/injectable.dart';
-import '../models/response/auth_response_dm.dart';
 
 @LazySingleton(as: AuthRemoteDS)
 class AuthRemoteDsImpl implements AuthRemoteDS {
@@ -50,7 +48,7 @@ class AuthRemoteDsImpl implements AuthRemoteDS {
   Future<Response> login(String email, String password)async {
     try{
       final response = await _dio.post(
-        '${ApiConstants.baseURL}${ApiConstants.signUp}',
+        '${ApiConstants.baseURL}${ApiConstants.signIn}',
         data: {
           "email": email,
           "password": password,

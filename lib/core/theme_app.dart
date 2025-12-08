@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
-abstract class ThemeApp{
+class ThemeApp{
   static ThemeData themeApp = ThemeData(
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.whiteColor,

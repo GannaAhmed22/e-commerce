@@ -1,4 +1,3 @@
-import 'package:ecommerce/api_manager/api_failures.dart';
 import 'package:ecommerce/auth/domain/usecases/login_usecase.dart';
 import 'package:ecommerce/auth/domain/usecases/register_usecase.dart';
 import 'package:ecommerce/auth/presentation/auth_view_model/auth_states.dart';
@@ -40,8 +39,8 @@ class AuthCubit extends Cubit<AuthStates> {
   Future<void> userLogin() async {
     emit(LoadingAuthState());
     final response = await _loginUseCase.invoke(
-      emailController.text,
-      passController.text,
+      userNameLoginController.text,
+      passLoginController.text,
     );
     response.fold(
           (failure) => emit(ErrorAuthState(errorMsg: failure.errorMessage)),

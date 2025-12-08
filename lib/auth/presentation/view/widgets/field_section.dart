@@ -22,7 +22,7 @@ class FieldSection extends StatefulWidget {
 }
 
 class _FieldSectionState extends State<FieldSection> {
-  bool _obscureText = true; // 👈 Controls password visibility
+  bool _obscureText = true; 
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +33,12 @@ class _FieldSectionState extends State<FieldSection> {
       children: [
         Text(
           widget.title,
-          style: AppFonts.generalText(color: AppColors.whiteColor),
+          style: AppFonts.white18Medium,
         ),
         SizedBox(height: size.height * 0.01),
         TextFormField(
           maxLines: 1,
-          validator: widget.validator, // 👈 Use the passed validator here
+          validator: widget.validator, 
           controller:widget.fieldController ,
           obscureText: widget.isPassword ? _obscureText : false,
           decoration: InputDecoration(

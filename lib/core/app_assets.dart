@@ -1,13 +1,10 @@
-abstract class AppAssets{
- static const String categoryIcon = "assets/icons/category_icon.png";
- static const String favIcon = "assets/icons/fav_icon.png";
- static const String homeIcon = "assets/icons/home_icon.png";
- static const String profile = "assets/icons/profile_icon.png";
- static const String routeLogo = "assets/images/route_logo.png";
- static const String searchIcon = "assets/icons/search_icon.png";
- static const String shoppingCartIcon = "assets/icons/shopping cart_icon.png";
- static const String routeInit = "assets/images/route_init.png";
-
-
-
+class AppAssets {
+  static const String categoryIcon = "assets/icons/category_icon.png";
+  static const String favIcon = "assets/icons/fav_icon.png";
+  static const String homeIcon = "assets/icons/home_icon.png";
+  static const String profile = "assets/icons/profile_icon.png";
+  static const String routeLogo = "assets/images/route_logo.png";
+  static const String searchIcon = "assets/icons/search_icon.png";
+  static const String shoppingCartIcon = "assets/icons/shopping cart_icon.png";
+  static const String routeInit = "assets/images/route_init.png";
 }

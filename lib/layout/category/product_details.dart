@@ -17,7 +17,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   int selectedIndexColor = -1;
   int selectedIndexSize = -1;
   static const List<String> _sizes = ['20', '25', '30', '45'];
-  static const List<String> _colors = ['red', 'blue', 'purple', 'green'];
+  // static const List<String> _colors = ['red', 'blue', 'purple', 'green'];
 
   @override
   Widget build(BuildContext context) {

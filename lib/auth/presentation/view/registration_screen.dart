@@ -1,23 +1,24 @@
 import 'package:ecommerce/auth/presentation/auth_view_model/auth_states.dart';
 import 'package:ecommerce/auth/presentation/auth_view_model/auth_view_model.dart';
 import 'package:ecommerce/auth/presentation/view/widgets/field_section.dart';
+import 'package:ecommerce/core/networking/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../core/app_assets.dart';
 import '../../../core/app_colors.dart';
 import '../../../core/app_fonts.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+class RegisterationScreen extends StatelessWidget {
+  const RegisterationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final AuthCubit authCubit = context.read<AuthCubit>();
 
     final size = MediaQuery.of(context).size;
-    final text = Theme.of(context).textTheme;
 
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
@@ -39,13 +40,13 @@ class RegisterScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Lottie.asset('assets/animate_icon/Failed.json'),
-                    Text(
-                      state.errorMsg,
-                      style: text.titleLarge!.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.darkBlue,
-                      ),
-                    ),
+                    // Text(
+                    //   state.errorMsg,
+                    //   style: text.titleLarge!.copyWith(
+                    //     fontWeight: FontWeight.w700,
+                    //     color: AppColors.darkBlue,
+                    //   ),
+                    // ),
                   ],
                 );
               },
@@ -104,9 +105,9 @@ class RegisterScreen extends StatelessWidget {
                     fieldController: authCubit.passController,
                   ),
 
-                  SizedBox(height: size.height * .02),
+                  SizedBox(height: size.height * .06),
                   SizedBox(
-                    height: size.height * .056,
+                    height: 46.h,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -115,13 +116,13 @@ class RegisterScreen extends StatelessWidget {
                       ),
                       onPressed: () {
                         if (authCubit.formKey.currentState!.validate()) {
-                          // Example: send data to API or navigate
                           authCubit.userRegister();
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Form Submitted Successfully!'),
                             ),
                           );
+                          Navigator.pop(context);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -132,7 +133,7 @@ class RegisterScreen extends StatelessWidget {
                       },
                       child: Text(
                         "Sign up",
-                        style: AppFonts.button(color: AppColors.primaryColor),
+                        style: AppFonts.darkBlue20SemiBold,
                       ),
                     ),
                   ),
