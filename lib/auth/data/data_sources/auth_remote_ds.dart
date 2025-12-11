@@ -9,4 +9,5 @@ abstract class AuthRemoteDS {
     String rePassword,
   );
   Future<Response> login(String email, String password);
+  // Future<Either<ApiFailures, AuthResponseDm>> login(String email, String password)
 }

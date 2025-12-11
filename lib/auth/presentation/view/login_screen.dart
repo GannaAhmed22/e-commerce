@@ -7,7 +7,7 @@ import 'package:ecommerce/core/networking/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
+import 'package:toastification/toastification.dart';
 
 import '../auth_view_model/auth_view_model.dart';
 
@@ -20,41 +20,44 @@ class LoginScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
-      
+
       body: BlocListener<AuthCubit, AuthStates>(
         listener: (BuildContext context, state) {
+          if (state is! LoadingAuthState && Navigator.canPop(context)) {
+            Navigator.of(context).pop();
+          }
           if (state is LoadingAuthState) {
             showDialog(
               context: context,
+              barrierDismissible: false,
               builder: (context) {
                 return const Center(child: CircularProgressIndicator());
               },
             );
           }
           if (state is ErrorAuthState) {
-            showDialog(
+            toastification.show(
               context: context,
-              builder: (context) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Lottie.asset('assets/animate_icon/Failed.json'),
-                    // Text(state.errorMsg,style: text.titleLarge!.copyWith(
-                    //   fontWeight: FontWeight.w700,
-                    //   color: AppColors.darkBlue
-                    // ),)
-                  ],
-                );
-              },
+              type: ToastificationType.error,
+              style: ToastificationStyle.fillColored,
+              title: Text("Error"),
+              showProgressBar: true,
+              description: Text(state.errorMsg),
+              autoCloseDuration: Duration(seconds: 4),
             );
           }
           if (state is SuccessAuthState) {
-            showDialog(
+            // Navigator.of(context, rootNavigator: true).pop();
+            toastification.show(
               context: context,
-              builder: (context) {
-                return Lottie.asset('assets/animate_icon/Success.json');
-              },
+              showProgressBar: true,
+              type: ToastificationType.success,
+              style: ToastificationStyle.fillColored,
+              title: Text("Successful operation"),
+              description: Text("Operation completed successfully."),
+              autoCloseDuration: Duration(seconds: 3),
             );
+            Navigator.pushReplacementNamed(context, Routes.home);
           }
         },
         child: SingleChildScrollView(
@@ -108,7 +111,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * .02),
                   SizedBox(
-                    height:46.h,
+                    height: 46.h,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -118,45 +121,35 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () {
                         if (authCubit.loginFormKey.currentState!.validate()) {
                           authCubit.userLogin();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Form Submitted Successfully!'),
-                            ),
-                          );
-                          Navigator.of(context, rootNavigator: true).pop(); 
-                          Navigator.pushReplacementNamed(context, Routes.home);
-
+                          // ScaffoldMessenger.of(context).showSnackBar(
+                          //   const SnackBar(
+                          //     content: Text('Form Submitted Successfully!'),
+                          //   ),
+                          // );
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Please fix the errors in red'),
-                            ),
-                          );
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //     const SnackBar(
+                        //       content: Text('Please fix the errors in red'),
+                        //     ),
+                        //   );
                         }
                       },
-                      child: Text(
-                        "Login",
-                        style: AppFonts.darkBlue20SemiBold,
-                      ),
+                      child: Text("Login", style: AppFonts.darkBlue20SemiBold),
                     ),
                   ),
                   SizedBox(height: size.height * .02),
-          
+
                   Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Don't have an account?",
                         style: AppFonts.white14Medium,
                       ),
                       TextButton(
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-              
-                        ),
+                        style: TextButton.styleFrom(padding: EdgeInsets.zero),
                         onPressed: () {
-                          Navigator.pushNamed(context,Routes.registeration);
+                          Navigator.pushNamed(context, Routes.registeration);
                         },
                         child: Text(
                           " Create account",

@@ -45,27 +45,20 @@ class AuthRemoteDsImpl implements AuthRemoteDS {
   }
 
   @override
-  Future<Response> login(String email, String password)async {
-    try{
+  Future<Response> login(String email, String password) async {
+    try {
       final response = await _dio.post(
         '${ApiConstants.baseURL}${ApiConstants.signIn}',
-        data: {
-          "email": email,
-          "password": password,
-        },
+        data: {"email": email, "password": password},
       );
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
         return response;
-      } else {
-        throw DioException(
-          requestOptions: response.requestOptions,
-          response: response,
-          message: 'Unexpected status code: ${response.statusCode}',
-          type: DioExceptionType.badResponse,
-        );
+      }else{
+        throw Exception("unexpeted status code:${response.statusCode}");
       }
     } on DioException catch (e) {
-      throw Exception('Login failed: ${e.response?.data ?? e.message}');
-    }
+      // returning only server body , only care about error message
+      return e.response!;
     }
   }
+}

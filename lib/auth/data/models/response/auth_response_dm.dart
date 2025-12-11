@@ -1,36 +1,26 @@
-import 'package:ecommerce/auth/domain/entities/user_entity.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'auth_response_dm.g.dart';
 
+@JsonSerializable()
 class AuthResponseDm {
-  AuthResponseDm({String? message, User? user, String? token}) {
-    _message = message;
-    _user = user;
-    _token = token;
-  }
+  final String? message;
+  final User? user;
+  final String? token;
 
-  AuthResponseDm.fromJson(dynamic json) {
-    _message = json['message'];
-    _user = json['user'] != null ? User.fromJson(json['user']) : null;
-    _token = json['token'];
-  }
-  String? _message;
-  User? _user;
-  String? _token;
+  AuthResponseDm({this.message, this.user, this.token});
 
-  String? get message => _message;
-  User? get user => _user;
-  String? get token => _token;
+  factory AuthResponseDm.fromJson(Map<String, dynamic> json) => _$AuthResponseDmFromJson(json);
+  Map<String, dynamic> toJson() => _$AuthResponseDmToJson(this);
 }
 
-class User extends UserEntity {
-  final String? _role;
+@JsonSerializable()
+class User {
+  final String? id;
+  final String? name;
 
-  User({required String name, required String email, String? role})
-    : _role = role,
-      super(name, email);
+  User({this.id, this.name});
 
-  User.fromJson(dynamic json)
-    : _role = json['role'],
-      super(json['name'], json['email']);
-
-  String? get role => _role;
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }
+

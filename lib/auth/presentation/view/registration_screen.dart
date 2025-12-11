@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+import 'package:toastification/toastification.dart';
 
 import '../../../core/app_assets.dart';
 import '../../../core/app_colors.dart';
@@ -24,6 +25,9 @@ class RegisterationScreen extends StatelessWidget {
       backgroundColor: AppColors.primaryColor,
       body: BlocListener<AuthCubit, AuthStates>(
         listener: (BuildContext context, state) {
+          if (state is! LoadingAuthState && Navigator.canPop(context)) {
+            Navigator.of(context).pop();
+          }
           if (state is LoadingAuthState) {
             showDialog(
               context: context,
@@ -33,32 +37,27 @@ class RegisterationScreen extends StatelessWidget {
             );
           }
           if (state is ErrorAuthState) {
-            showDialog(
+            toastification.show(
               context: context,
-              builder: (context) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Lottie.asset('assets/animate_icon/Failed.json'),
-                    // Text(
-                    //   state.errorMsg,
-                    //   style: text.titleLarge!.copyWith(
-                    //     fontWeight: FontWeight.w700,
-                    //     color: AppColors.darkBlue,
-                    //   ),
-                    // ),
-                  ],
-                );
-              },
+              type: ToastificationType.error,
+              style: ToastificationStyle.fillColored,
+              title: Text("Error"),
+              showProgressBar: true,
+              description: Text(state.errorMsg),
+              autoCloseDuration: Duration(seconds: 4),
             );
           }
           if (state is SuccessAuthState) {
-            showDialog(
+            toastification.show(
               context: context,
-              builder: (context) {
-                return Lottie.asset('assets/animate_icon/Success.json');
-              },
+              showProgressBar: true,
+              type: ToastificationType.success,
+              style: ToastificationStyle.fillColored,
+              title: Text("Successful operation"),
+              description: Text("Operation completed successfully."),
+              autoCloseDuration: Duration(seconds: 3),
             );
+            Navigator.pop(context);
           }
         },
         child: SingleChildScrollView(
@@ -117,18 +116,17 @@ class RegisterationScreen extends StatelessWidget {
                       onPressed: () {
                         if (authCubit.formKey.currentState!.validate()) {
                           authCubit.userRegister();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Form Submitted Successfully!'),
-                            ),
-                          );
-                          Navigator.pop(context);
+                          // ScaffoldMessenger.of(context).showSnackBar(
+                          //   const SnackBar(
+                          //     content: Text('Form Submitted Successfully!'),
+                          //   ),
+                          // );
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Please fix the errors in red'),
-                            ),
-                          );
+                          // ScaffoldMessenger.of(context).showSnackBar(
+                          //   const SnackBar(
+                          //     content: Text('Please fix the errors in red'),
+                          //   ),
+                          // );
                         }
                       },
                       child: Text(
