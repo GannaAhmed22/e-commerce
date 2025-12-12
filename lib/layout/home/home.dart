@@ -32,7 +32,7 @@ class Home extends StatelessWidget {
                     TextButton(
                       onPressed: () {},
                       child: Text(
-                        "view all",
+                        "presentation all",
                         style: theme.labelLarge!.copyWith(
                           color: AppColors.primaryColor,
                         ),
