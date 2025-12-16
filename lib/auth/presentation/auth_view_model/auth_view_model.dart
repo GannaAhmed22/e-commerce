@@ -16,8 +16,16 @@ class AuthCubit extends Cubit<AuthStates> {
   final TextEditingController phoneNumController = TextEditingController();
   final TextEditingController userNameLoginController = TextEditingController();
   final TextEditingController passLoginController = TextEditingController();
+
+  final TextEditingController profileNameController = TextEditingController();
+  final TextEditingController profileEmailController = TextEditingController();
+  final TextEditingController profilePhoneController = TextEditingController();
+  final TextEditingController profileAddressController =TextEditingController();
+  final TextEditingController profilePassController = TextEditingController();
+
   final loginFormKey = GlobalKey<FormState>();
   final formKey = GlobalKey<FormState>();
+  final profileFormKey = GlobalKey<FormState>();
 
   // register
   Future<void> userRegister() async {
@@ -43,8 +51,8 @@ class AuthCubit extends Cubit<AuthStates> {
       passLoginController.text,
     );
     response.fold(
-          (failure) => emit(ErrorAuthState(errorMsg: failure.errorMessage)),
-          (_) => emit(SuccessAuthState()),
+      (failure) => emit(ErrorAuthState(errorMsg: failure.errorMessage)),
+      (_) => emit(SuccessAuthState()),
     );
   }
 }

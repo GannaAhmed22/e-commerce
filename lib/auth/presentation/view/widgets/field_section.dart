@@ -8,10 +8,21 @@ class FieldSection extends StatefulWidget {
     super.key,
     required this.title,
     required this.hintText,
-    this.isPassword = false, required this.fieldController,this.validator,
+    this.isPassword = false,
+    required this.fieldController,
+    this.validator,
+    this.suffixIconWidget,
+    this.titleStyle,
+    this.textStyle,
+    this.isProfile = false,
+
   });
 
   final String title;
+  final TextStyle? titleStyle;
+  final TextStyle? textStyle;
+  final bool isProfile;
+  final Widget? suffixIconWidget;
   final String hintText;
   final bool isPassword;
   final TextEditingController fieldController;
@@ -22,7 +33,7 @@ class FieldSection extends StatefulWidget {
 }
 
 class _FieldSectionState extends State<FieldSection> {
-  bool _obscureText = true; 
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +44,15 @@ class _FieldSectionState extends State<FieldSection> {
       children: [
         Text(
           widget.title,
-          style: AppFonts.white18Medium,
+          style: widget.isProfile ? widget.titleStyle : AppFonts.white18Medium,
         ),
         SizedBox(height: size.height * 0.01),
         TextFormField(
           maxLines: 1,
-          validator: widget.validator, 
-          controller:widget.fieldController ,
+          validator: widget.validator,
+          controller: widget.fieldController,
           obscureText: widget.isPassword ? _obscureText : false,
+          style: widget.isProfile ? widget.titleStyle :null,
           decoration: InputDecoration(
             hintText: widget.hintText,
             filled: true,
@@ -51,17 +63,17 @@ class _FieldSectionState extends State<FieldSection> {
             ),
             suffixIcon: widget.isPassword
                 ? IconButton(
-              icon: Icon(
-                _obscureText ? Icons.visibility_off : Icons.visibility,
-                color: Colors.grey,
-              ),
-              onPressed: () {
-                setState(() {
-                  _obscureText = !_obscureText;
-                });
-              },
-            )
-                : null,
+                    icon: Icon(
+                      _obscureText ? Icons.visibility_off : Icons.visibility,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  )
+                : widget.suffixIconWidget,
           ),
         ),
       ],
