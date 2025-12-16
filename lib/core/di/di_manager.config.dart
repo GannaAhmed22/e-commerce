@@ -22,6 +22,16 @@ import '../../auth/domain/repo_contract/auth_repo_contract.dart' as _i700;
 import '../../auth/domain/usecases/login_usecase.dart' as _i442;
 import '../../auth/domain/usecases/register_usecase.dart' as _i246;
 import '../../auth/presentation/auth_view_model/auth_view_model.dart' as _i1066;
+import '../../layout/home/data/remote_data_sources/dart_source_impl.dart'
+    as _i174;
+import '../../layout/home/data/remote_data_sources/data_source_contract.dart'
+    as _i544;
+import '../../layout/home/data/repositories/category_repo_impl.dart' as _i765;
+import '../../layout/home/domain/repository_contracts/cateogry_repo_contracts.dart'
+    as _i678;
+import '../../layout/home/domain/usecases/get_categories.dart' as _i631;
+import '../../layout/home/presentation/view_model/category_view_model.dart'
+    as _i266;
 import 'di_module.dart' as _i211;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -38,9 +48,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i458.AuthRemoteDS>(
       () => _i428.AuthRemoteDsImpl(gh<_i361.Dio>()),
     );
+    gh.lazySingleton<_i544.DataSourceContract>(
+      () => _i174.DataSourceImpl(gh<_i361.Dio>()),
+    );
     gh.factory<_i700.AuthRepoContract>(
       () =>
           _i869.AuthRepoImpl(gh<_i458.AuthRemoteDS>(), gh<_i1039.AuthMapper>()),
+    );
+    gh.factory<_i678.CateogryRepoContracts>(
+      () => _i765.CategoryRepoImpl(gh<_i544.DataSourceContract>()),
     );
     gh.factory<_i442.LoginUseCase>(
       () => _i442.LoginUseCase(gh<_i700.AuthRepoContract>()),
@@ -53,6 +69,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i246.RegisterUseCase>(),
         gh<_i442.LoginUseCase>(),
       ),
+    );
+    gh.factory<_i631.GetCategoriesUsecase>(
+      () => _i631.GetCategoriesUsecase(gh<_i678.CateogryRepoContracts>()),
+    );
+    gh.factory<_i266.CategoryViewCubit>(
+      () => _i266.CategoryViewCubit(gh<_i631.GetCategoriesUsecase>()),
     );
     return this;
   }

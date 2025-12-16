@@ -4,7 +4,7 @@ import 'package:ecommerce/layout/category/category.dart';
 import 'package:ecommerce/layout/nav_bar/widgets/selected_icon.dart';
 import 'package:flutter/material.dart';
 
-import '../home/home.dart';
+import '../home/presentation/view/home.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});

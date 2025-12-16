@@ -18,7 +18,6 @@ class RegisterationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthCubit authCubit = context.read<AuthCubit>();
-
     final size = MediaQuery.of(context).size;
 
     return Scaffold(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/app_colors.dart';
+import '../../../../../core/app_colors.dart';
 
 class BannerView extends StatefulWidget {
   const BannerView({super.key});

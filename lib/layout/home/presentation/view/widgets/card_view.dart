@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/app_assets.dart';
-import '../../../core/app_colors.dart';
+import '../../../../../core/app_assets.dart';
+import '../../../../../core/app_colors.dart';
 
 class CardView extends StatelessWidget {
   const CardView({super.key});

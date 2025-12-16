@@ -8,8 +8,9 @@ class ApiConstants {
    static String updatePass = "users/changeMyPassword";
    static String resetPass = "auth/resetPassword";
    static String updateData = "users/updateMe/";
-   static String getUsers = "users";
-   static String refreshToken = "auth/verifyToken";
+   static String categories = "categories";
+  //  static String getUsers = "users";
+  //  static String refreshToken = "auth/verifyToken";
 
 
     

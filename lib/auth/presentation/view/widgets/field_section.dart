@@ -37,12 +37,14 @@ class _FieldSectionState extends State<FieldSection> {
         ),
         SizedBox(height: size.height * 0.01),
         TextFormField(
+          
           maxLines: 1,
           validator: widget.validator, 
           controller:widget.fieldController ,
           obscureText: widget.isPassword ? _obscureText : false,
           decoration: InputDecoration(
             hintText: widget.hintText,
+            hintStyle: AppFonts.gray14Regular,
             filled: true,
             fillColor: AppColors.whiteColor,
             border: OutlineInputBorder(
@@ -53,7 +55,7 @@ class _FieldSectionState extends State<FieldSection> {
                 ? IconButton(
               icon: Icon(
                 _obscureText ? Icons.visibility_off : Icons.visibility,
-                color: Colors.grey,
+                color: AppColors.grayColor,
               ),
               onPressed: () {
                 setState(() {

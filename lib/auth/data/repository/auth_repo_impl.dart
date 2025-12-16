@@ -67,9 +67,6 @@ class AuthRepoImpl implements AuthRepoContract {
       );
     } else {
       services.saveSecureString("token", body.token ?? "none");
-      debugPrint("token recieved:${body.token}");
-      debugPrint("token saved:${services.getSecureString("token")}");
-
       return Right(null);
     }
   }

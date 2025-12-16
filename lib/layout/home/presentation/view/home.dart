@@ -1,11 +1,28 @@
 import 'package:ecommerce/core/app_colors.dart';
-import 'package:ecommerce/layout/home/widgets/banner_view.dart';
-import 'package:ecommerce/layout/home/widgets/card_view.dart';
-import 'package:ecommerce/layout/home/widgets/category_list.dart';
+import 'package:ecommerce/layout/home/presentation/view/widgets/banner_view.dart';
+import 'package:ecommerce/layout/home/presentation/view/widgets/card_view.dart';
+import 'package:ecommerce/layout/home/presentation/view/widgets/category_list.dart';
+import 'package:ecommerce/layout/home/presentation/view_model/category_view_model.dart';
+import 'package:ecommerce/layout/home/presentation/view_model/category_states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  late final CategoryViewCubit cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    cubit = context.read<CategoryViewCubit>();
+    cubit.getCategories();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +57,22 @@ class Home extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 150, child: CategoryList()),
+                SizedBox(
+                  height: 150,
+                  child: BlocBuilder<CategoryViewCubit, CategoryViewState>(
+                    builder: (context, state) {
+                      if (state is LoadingitemsState) {
+                        return Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.primaryColor,
+                          ),
+                        );
+                      } else {
+                        return CategoryList();
+                      }
+                    },
+                  ),
+                ),
                 Text(
                   "Home Appliance",
                   style: theme.headlineSmall!.copyWith(
