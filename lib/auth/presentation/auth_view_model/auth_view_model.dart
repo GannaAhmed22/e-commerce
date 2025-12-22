@@ -30,8 +30,7 @@ class AuthCubit extends Cubit<AuthStates> {
   final TextEditingController profileNameController = TextEditingController();
   final TextEditingController profileEmailController = TextEditingController();
   final TextEditingController profilePhoneController = TextEditingController();
-  final TextEditingController profileAddressController =
-      TextEditingController();
+  final TextEditingController profileAddressController =TextEditingController();
   final TextEditingController profilePassController = TextEditingController();
 
   final loginFormKey = GlobalKey<FormState>();
