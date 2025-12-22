@@ -2,6 +2,7 @@ import 'package:ecommerce/core/app_assets.dart';
 import 'package:ecommerce/core/app_colors.dart';
 import 'package:ecommerce/layout/category/category.dart';
 import 'package:ecommerce/layout/nav_bar/widgets/selected_icon.dart';
+import 'package:ecommerce/auth/presentation/view/user_profile.dart';
 import 'package:flutter/material.dart';
 
 import '../home/home.dart';
@@ -15,7 +16,7 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int screenIndex = 0;
-  static const List<Widget> _tabs = [Home(), Category(), Home(), Home()];
+  static const List<Widget> _tabs = [Home(), Category(), Home(), UserProfile()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

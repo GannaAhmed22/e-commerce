@@ -11,4 +11,10 @@ abstract class AuthRepoContract {
     String rePassword,
   );
   Future<Either<ApiFailures, void>> login(String email, String password);
+  Future<Either<ApiFailures, void>> updateData(
+    {required String email,
+    required String phone,
+    required String name}
+  );
+  Future<Either<ApiFailures, void>> updatePass(String current, String pass);
 }

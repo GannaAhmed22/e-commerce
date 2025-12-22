@@ -1,6 +1,8 @@
 import 'package:ecommerce/auth/data/models/request/register_request_dm.dart';
+import 'package:ecommerce/auth/data/models/response/update_data_response.dart';
 import 'package:ecommerce/auth/domain/entities/user_entity.dart';
 import 'package:injectable/injectable.dart';
+
 @injectable
 class AuthMapper {
   // userEntity to request
@@ -13,9 +15,9 @@ class AuthMapper {
 
   // request& response to userEntity
   UserEntity dtoToEntity(RegisterRequestDm userInfo) {
-    return UserEntity(
-      userInfo.name!,
-      userInfo.email!,
-    );
+    return UserEntity(userInfo.name!,userInfo.email!,null);
+  }
+  UserEntity editDataModelToEntity(UpdateDataResponse userInfo) {
+    return UserEntity(userInfo.user!.name,userInfo.user!.email,null);
   }
 }

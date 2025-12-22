@@ -1,10 +1,11 @@
 class UserEntity {
-  String name;
-  String email;
-  // String token;
+  final String name;
+  final String email;
+  final String? phone; 
 
   UserEntity(
-    this.name,
-    this.email,
+     this.name,
+     this.email,
+    this.phone, 
   );
 }
