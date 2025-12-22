@@ -21,6 +21,8 @@ import '../../auth/data/repository/auth_repo_impl.dart' as _i869;
 import '../../auth/domain/repo_contract/auth_repo_contract.dart' as _i700;
 import '../../auth/domain/usecases/login_usecase.dart' as _i442;
 import '../../auth/domain/usecases/register_usecase.dart' as _i246;
+import '../../auth/domain/usecases/update_data_usecase.dart' as _i348;
+import '../../auth/domain/usecases/update_pass_usecase.dart' as _i1038;
 import '../../auth/presentation/auth_view_model/auth_view_model.dart' as _i1066;
 import 'di_module.dart' as _i211;
 
@@ -48,10 +50,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i246.RegisterUseCase>(
       () => _i246.RegisterUseCase(gh<_i700.AuthRepoContract>()),
     );
+    gh.factory<_i348.UpdateDataUsecase>(
+      () => _i348.UpdateDataUsecase(gh<_i700.AuthRepoContract>()),
+    );
+    gh.factory<_i1038.UpdatePassUsecase>(
+      () => _i1038.UpdatePassUsecase(gh<_i700.AuthRepoContract>()),
+    );
     gh.factory<_i1066.AuthCubit>(
       () => _i1066.AuthCubit(
         gh<_i246.RegisterUseCase>(),
         gh<_i442.LoginUseCase>(),
+        gh<_i348.UpdateDataUsecase>(),
+        gh<_i1038.UpdatePassUsecase>(),
       ),
     );
     return this;
