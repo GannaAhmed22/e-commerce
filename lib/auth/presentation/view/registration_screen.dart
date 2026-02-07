@@ -1,11 +1,9 @@
 import 'package:ecommerce/auth/presentation/auth_view_model/auth_states.dart';
 import 'package:ecommerce/auth/presentation/auth_view_model/auth_view_model.dart';
 import 'package:ecommerce/auth/presentation/view/widgets/field_section.dart';
-import 'package:ecommerce/core/networking/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
 import 'package:toastification/toastification.dart';
 
 import '../../../core/app_assets.dart';
